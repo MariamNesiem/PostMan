@@ -1,0 +1,115 @@
+{
+	"info": {
+		"_postman_id": "3fbe6e32-22ce-4b69-940b-262340de1b7e",
+		"name": "Users",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"userId\", pm.response.json().id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "G-Token",
+						"value": "ROM831ESV",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"mariam@gmail.com\",\r\n    \"firstName\":\"Mariam\",\r\n    \"lastName\":\"Nesiem\"\r\n}"
+				},
+				"url": {
+					"raw": "http://{{Host}}/users",
+					"protocol": "http",
+					"host": [
+						"{{Host}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const user = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Updated email\", function () {\r",
+							"    pm.expect(user.email).to.eql('mariam@yahoo.com');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"first name unchanged\", function () {\r",
+							"    pm.expect(user.firstName).to.eql('Mariam');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"last name unchanged\", function () {\r",
+							"    pm.expect(user.lastName).to.eql('Nesiem');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "G-Token",
+						"value": "ROM831ESV",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{auth}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"mariam@yahoo.com\"\r\n}"
+				},
+				"url": {
+					"raw": "http://{{Host}}/users/{{userId}}",
+					"protocol": "http",
+					"host": [
+						"{{Host}}"
+					],
+					"path": [
+						"users",
+						"{{userId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

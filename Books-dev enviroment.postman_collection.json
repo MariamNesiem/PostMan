@@ -1,0 +1,249 @@
+{
+	"info": {
+		"_postman_id": "f5969ee4-ca62-40aa-be4f-aad20a757790",
+		"name": "Books-dev enviroment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:3000/books",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const moment=require('moment');\r",
+							"\r",
+							"pm.test(\"Create date is equal to today\",function(){\r",
+							"const data=pm.response.json();\r",
+							"const data2=_.result(pm,'response.json');\r",
+							"\r",
+							"pm.expect(moment(data.createdAt).format('MM/DD/YYYY')).to.eql(moment().format('MM/DD/YYYY'))\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "G-TOKEN",
+						"value": "ROM831ESV",
+						"type": "text"
+					},
+					{
+						"key": "content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"title\": \"Mariam\",\r\n        \"author\": \"Mariam\",\r\n        \"publicationDate\": \"2003-04-16T00:00:00.000Z\",\r\n        \"isbn\": \"1593281056\",\r\n        \"createdAt\": \"2020-03-27T00:00:00.000Z\"\r\n    }"
+				},
+				"url": {
+					"raw": "localhost:3000/books",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/books",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code name has string\", function () {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Assert on number of returned data\", function(){\r",
+							"const books=pm.response.json();\r",
+							"pm.expect(books.length).to.eql(9);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Assert on titles\", function(){\r",
+							"const books=pm.response.json();\r",
+							"pm.expect(books.every((book)=>{\r",
+							"    return book.title !== undefined;\r",
+							"})).to.be.true;\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "G-TOKEN",
+						"value": "ROM831ESV",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/books",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/books/5",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "G-TOKEN",
+						"value": "ROM831ESV",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/books/5",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"books",
+						"5"
+					],
+					"query": [
+						{
+							"key": "G-TOKEN",
+							"value": "ROM831ESV",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Import request",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Google Chrome\";v=\"87\", \" Not;A Brand\";v=\"99\", \"Chromium\";v=\"87\""
+					},
+					{
+						"key": "DNT",
+						"value": "1"
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					},
+					{
+						"key": "g-token",
+						"value": "ROM831ESV"
+					},
+					{
+						"key": "cache-control",
+						"value": "no-cache"
+					},
+					{
+						"key": "postman-token",
+						"value": "94e03697-36ba-33d0-bf88-eae6aeb4380e"
+					},
+					{
+						"key": "Origin",
+						"value": "http://localhost:3000"
+					},
+					{
+						"key": "Sec-Fetch-Site",
+						"value": "same-origin"
+					},
+					{
+						"key": "Sec-Fetch-Mode",
+						"value": "cors"
+					},
+					{
+						"key": "Sec-Fetch-Dest",
+						"value": "empty"
+					},
+					{
+						"key": "Referer",
+						"value": "http://localhost:3000/ui"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en-US,en;q=0.9,ar;q=0.8"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"title\":\"Mariam\",\"author\":\"Nesiem\",\"isbn\":\"\",\"releaseDate\":\"\"}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/books",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"books"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
